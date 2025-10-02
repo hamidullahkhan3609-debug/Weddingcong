@@ -1,106 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <title>Wedding Congratulations</title>
   <style>
     body {
-      margin:0;
-      padding:0;
+      margin: 0;
+      padding: 0;
       font-family: 'Great Vibes', cursive;
-      overflow-x:hidden;
-      /* Multicoloured Decorative Background */
-      background: 
-        radial-gradient(circle at top left, #ffd1dc, #ffe4e1, #fff0f5),
-        radial-gradient(circle at bottom right, #c1e1ff, #e6ccff, #fff);
-      background-blend-mode: screen;
+      background: linear-gradient(45deg, #ffdde1, #ee9ca7, #c1e1ff, #e0c3fc);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      overflow-x: hidden;
     }
-
-    /* Gate */
-    .container {
-      position: relative;
-      width: 420px;
-      height: 520px;
-      margin: 100px auto;
-      perspective: 1200px;
+    @keyframes gradientBG {
+      0% {background-position:0% 50%}
+      50% {background-position:100% 50%}
+      100% {background-position:0% 50%}
     }
-    .gate {
-      width: 100%;
-      height: 100%;
-      background: url('https://i.pinimg.com/736x/7a/bd/6e/7abd6ef6ed3fbc547e4d77e076b2b8f9.jpg') center/cover no-repeat;
-      border:8px solid gold;
-      border-radius:18px;
-      box-shadow: 0 20px 45px rgba(0,0,0,0.5);
-      transform-style: preserve-3d;
-      transition: transform 2s ease;
-    }
-    .gate.open {
-      transform: rotateY(-110deg);
-    }
-    .open-btn {
-      position: absolute;
-      bottom: -70px;
-      left: 50%;
-      transform: translateX(-50%);
-      padding: 15px 35px;
-      background: linear-gradient(45deg, #ff5c9e, #ff85a1);
+    h1 {
+      text-align:center;
+      margin: 20px;
+      font-size: 40px;
       color: white;
-      font-size: 18px;
-      border: none;
-      border-radius: 35px;
-      cursor: pointer;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+      text-shadow: 2px 2px 8px black;
     }
-
-    /* Message Card */
+    .doors {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      margin-top: 50px;
+    }
+    .door {
+      width: 280px;
+      height: 400px;
+      border: 6px solid gold;
+      border-radius: 15px;
+      background: url('https://i.pinimg.com/736x/7a/bd/6e/7abd6ef6ed3fbc547e4d77e076b2b8f9.jpg') center/cover no-repeat;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      transition: transform 2s ease;
+      transform-style: preserve-3d;
+    }
+    .door.open { transform: rotateY(-120deg); }
+    .name {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 24px;
+      color: gold;
+      font-weight: bold;
+      text-shadow: 1px 1px 4px black;
+    }
     .card {
       display: none;
+      margin: 40px auto;
       width: 80%;
       max-width: 700px;
-      margin: 40px auto;
-      padding: 40px;
+      padding: 30px;
       background: white;
       border: 6px double gold;
-      border-radius: 25px;
-      box-shadow: 0 15px 45px rgba(0,0,0,0.3);
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+      text-align: center;
       animation: fadeIn 2s ease forwards;
-      text-align:center;
     }
-    .card h1 {
-      color:#d63384;
-      font-size:42px;
+    .card h2 {
+      color: #d63384;
+      font-size: 38px;
     }
     .card p {
-      font-size:20px;
-      font-family:'Segoe UI', sans-serif;
-      color:#333;
+      font-size: 20px;
+      color: #333;
     }
-
-    /* Reveal Button & Signature */
     .reveal-btn {
-      margin-top:20px;
-      padding:12px 25px;
-      background:#ff85a1;
-      color:white;
-      border:none;
-      border-radius:25px;
-      font-size:16px;
-      cursor:pointer;
-      box-shadow:0 6px 15px rgba(0,0,0,0.2);
+      margin-top: 15px;
+      padding: 10px 20px;
+      background: #ff85a1;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
     }
     .signature {
-      display:none;
-      margin-top:25px;
-      font-size:22px;
-      color:#111;
-      font-family:'Dancing Script', cursive;
-      white-space:nowrap;
-      overflow:hidden;
-      border-right:2px solid #111;
+      display: none;
+      margin-top: 20px;
+      font-size: 24px;
+      color: #111;
+      font-family: 'Dancing Script', cursive;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid #111;
       animation: handwriting 3s steps(30) forwards;
     }
-
-    /* Animations */
     @keyframes fadeIn {
       from {opacity:0; transform:scale(0.9);}
       to {opacity:1; transform:scale(1);}
@@ -109,15 +100,27 @@
       from {width:0;}
       to {width:100%;}
     }
-
-    /* Confetti */
-    .confetti {
-      position:fixed;
-      width:12px;
-      height:12px;
-      top:-10px;
-      animation: fall linear forwards;
-      z-index:10;
+    /* Balloons */
+    .balloon {
+      position: fixed;
+      bottom: -150px;
+      width: 40px;
+      height: 60px;
+      border-radius: 50%;
+      animation: float 6s linear infinite;
+    }
+    @keyframes float {
+      to { transform: translateY(-110vh);}
+    }
+    /* Petals */
+    .petal {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      border-radius: 50%;
+      top: -20px;
+      animation: fall 8s linear infinite;
     }
     @keyframes fall {
       to { transform: translateY(110vh) rotate(360deg);}
@@ -126,41 +129,83 @@
 </head>
 <body>
 
-  <!-- Gate -->
-  <div class="container">
-    <div class="gate" id="gate"></div>
-    <button class="open-btn" onclick="openGate()">Open Gate to See Surprise</button>
+  <h1>✨ Choose whose wedding surprise to open ✨</h1>
+  <div class="doors">
+    <div>
+      <div class="door" onclick="openGate('hayat')"></div>
+      <div class="name">Hayat Ullah Khan</div>
+    </div>
+    <div>
+      <div class="door" onclick="openGate('saqib')"></div>
+      <div class="name">Saqib Ullah Khan</div>
+    </div>
   </div>
 
-  <!-- Card -->
-  <div class="card" id="card">
-    <h1>🎊 Congratulations Hayat Ullah Khan 🎉</h1>
-    <p>May your wedding be filled with love, laughter, and lifelong happiness.<br>
-    May this be the start of a beautiful journey together ❤️</p>
-    <button class="reveal-btn" onclick="showSignature()">See who sent this</button>
-    <div class="signature" id="signature">💌 With love, from Hamid Ullah Khan</div>
+  <!-- Hayat Card -->
+  <div class="card" id="hayat-card">
+    <h2>💍 Congratulations Hayat Ullah Khan 💍</h2>
+    <p>May your marriage be filled with endless love, laughter and blessings.<br>
+    Wishing you a beautiful journey ahead 🌹</p>
+    <button class="reveal-btn" onclick="showSignature('hayat')">See who sent this</button>
+    <div class="signature" id="hayat-signature">💌 With love, from Hamid Ullah Khan</div>
   </div>
+
+  <!-- Saqib Card -->
+  <div class="card" id="saqib-card">
+    <h2>💍 Congratulations Saqib Ullah Khan 💍</h2>
+    <p>May your union be full of joy, peace, and endless happiness.<br>
+    Wishing you both everlasting love 💖</p>
+    <button class="reveal-btn" onclick="showSignature('saqib')">See who sent this</button>
+    <div class="signature" id="saqib-signature">💌 With love, from Hamid Ullah Khan</div>
+  </div>
+
+  <!-- Background Music -->
+  <audio id="bg-music" src="https://www.bensound.com/bensound-music/bensound-romantic.mp3"></audio>
 
   <script>
-    function openGate(){
-      document.getElementById('gate').classList.add('open');
-      setTimeout(() => {
-        document.getElementById('card').style.display = 'block';
-        launchConfetti();
-      }, 2000);
+    function openGate(person) {
+      let doors = document.querySelectorAll('.door');
+      doors.forEach(d => d.classList.remove('open'));
+      event.target.classList.add('open');
+
+      setTimeout(()=>{
+        document.getElementById(person+'-card').style.display = 'block';
+        launchBalloons();
+        launchPetals();
+        playMusic();
+      },2000);
     }
-    function showSignature(){
-      document.getElementById('signature').style.display = 'block';
+
+    function showSignature(person){
+      document.getElementById(person+'-signature').style.display = 'block';
     }
-    function launchConfetti(){
-      for(let i=0;i<80;i++){
-        let c=document.createElement('div');
-        c.classList.add('confetti');
-        document.body.appendChild(c);
-        c.style.left = Math.random()*window.innerWidth + 'px';
-        c.style.background = 'hsl('+Math.random()*360+',100%,50%)';
-        c.style.animationDuration = (3+Math.random()*2)+'s';
-        setTimeout(()=>c.remove(),5000);
+
+    function playMusic(){
+      let music = document.getElementById("bg-music");
+      music.play().catch(()=>{});
+    }
+
+    function launchBalloons(){
+      for(let i=0;i<20;i++){
+        let b=document.createElement('div');
+        b.className='balloon';
+        b.style.left=Math.random()*window.innerWidth+'px';
+        b.style.background=`hsl(${Math.random()*360},70%,60%)`;
+        b.style.animationDuration=(4+Math.random()*3)+'s';
+        document.body.appendChild(b);
+        setTimeout(()=>b.remove(),8000);
+      }
+    }
+
+    function launchPetals(){
+      for(let i=0;i<30;i++){
+        let p=document.createElement('div');
+        p.className='petal';
+        p.style.left=Math.random()*window.innerWidth+'px';
+        p.style.background=`hsl(${330+Math.random()*30},80%,70%)`;
+        p.style.animationDuration=(5+Math.random()*5)+'s';
+        document.body.appendChild(p);
+        setTimeout(()=>p.remove(),10000);
       }
     }
   </script>
