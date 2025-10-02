@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Luxury Wedding Surprise</title>
+
+<!-- Google fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --rose1: #fff2f5;
+    --rose2: #ffe0ec;
+    --gold: #d4af37;
+    --deep: #d63384;
+    --card-bg: rgba(255,255,255,0.95);
+  }
+  html,body{height:100%; margin:0; font-family: "Montserrat", system-ui, sans-serif; -webkit-font-smoothing:antialiased;}
+  body{
+    overflow-x:hidden;
+    background:
+      radial-gradient(60% 40% at 10% 10%, rgba(255,215,200,0.12), transparent 15%),
+      radial-gradient(50% 30% at 90% 90%, rgba(255,230,240,0.08), transparent 20%),
+      linear-gradient(180deg, #fff6f9 0%, #ffeef6 30%, #ffdee8 100%);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    min-height:100vh;
+    color:#222;
+  }
+
+  /* TOP: fairy lights + header */
+  .header {
+    width:100%;
+    padding:28px 12px 0;
+    pointer-events:none;
+  }
+  .fairy {
+    width:100%;
+    height:110px;
+    position:relative;
+    overflow:visible;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    margin-bottom: -40px;
+  }
+  /* string of lights */
+  .fairy .string{
+    width:90%;
+    height:2px;
+    background:linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    position:relative;
+    box-shadow:0 0 20px rgba(255,240,240,0.6);
+  }
+  .fairy .bulb{
+    position:absolute;
+    top:-10px;
+    width:12px; height:12px;
+    border-radius:50%;
+    filter:drop-shadow(0 0 8px rgba(255,230,230,0.8));
+    animation:twinkle 2.4s infinite;
+  }
+  .fairy .bulb:nth-child(odd){ animation-duration:2.1s; }
+  @keyframes twinkle { 0%{opacity:0.25; transform:scale(.8);} 50%{opacity:1; transform:scale(1.15);} 100%{opacity:0.4; transform:scale(.9);} }
+
+  /* dreamy bokeh floating */
+  .bokeh { position:fixed; inset:0; z-index:0; pointer-events:none; }
+  .bokeh .dot{ position:absolute; border-radius:50%; filter:blur(12px); opacity:.12; animation: drift 18s linear infinite; }
+  @keyframes drift { from{ transform: translateY(0) translateX(0);} to{ transform: translateY(-40vh) translateX(20vw);} }
+
+  /* faint text/name watermark */
+  .watermark{
+    position:fixed; left:5%; bottom:10%; font-family:"Great Vibes"; color:rgba(255,120,160,0.06);
+    font-size:48px; pointer-events:none; letter-spacing:2px; z-index:0;
+  }
+
+  /* main scene */
+  .stage {
+    width:100%;
+    max-width:1100px;
+    margin: 20px auto;
+    padding:20px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    z-index:5;
+  }
+
+  /* door container: 3d perspective */
+  .door-wrap{
+    width:420px; height:540px;
+    perspective:1400px;
+    margin-top:10px;
+    position:relative;
+    z-index:6;
+  }
+  .gate {
+    width:100%; height:100%;
+    position:relative;
+    transform-style:preserve-3d;
+  }
+  .panel {
+    position:absolute; top:0; width:50%; height:100%;
+    transform-origin:left center;
+    background:linear-gradient(180deg,#f6d7dd 0%, #f5c6d1 30%, #f0b2c1 100%);
+    border:6px solid rgba(212,175,55,0.95);
+    box-shadow: 0 14px 40px rgba(0,0,0,0.3), inset 0 4px 10px rgba(255,255,255,0.1);
+    border-radius:14px;
+    overflow:hidden;
+  }
+  .panel.right{ left:50%; transform-origin:right center; background:linear-gradient(180deg,#f7e3cb 0%, #f6d0aa 50%, #f3bf8f 100%); }
+  .panel::before{
+    content:"";
+    position:absolute; inset:0; background-image:
+      radial-gradient(circle at 20% 20%, rgba(255,255,255,0.12), transparent 8%),
+      linear-gradient(45deg, rgba(255,255,255,0.03), transparent 50%);
+    mix-blend-mode:screen;
+  }
+
+  /* decorations on gate */
+  .garland{
+    position:absolute; width:110%; left:-5%; top:8%;
+    height:110px; pointer-events:none;
+    background:
+      linear-gradient(135deg, rgba(255,140,180,0.1), transparent 40%),
+      url('https://i.ibb.co/2s3ZfQY/flower-garland.png') center/contain no-repeat;
+    opacity:.95;
+  }
+
+  .ribbon {
+    position:absolute; left:50%; transform:translateX(-50%); top:40%;
+    width:160px; height:160px; border-radius:50%;
+    border:6px solid rgba(255,255,255,0.45);
+    background: radial-gradient(circle at 40% 30%, rgba(255,255,255,0.14), transparent 20%), linear-gradient(135deg,#ff8db0,#ff5c9e);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  }
+
+  /* open button */
+  .open-btn {
+    margin-top:18px;
+    display:inline-block;
+    background:linear-gradient(90deg,#e94a7a,#ff7eb3);
+    color:white; border:none; padding:14px 28px; border-radius:40px; font-weight:700; font-size:16px;
+    box-shadow: 0 10px 30px rgba(214,47,120,0.22);
+    cursor:pointer;
+    z-index:8;
+  }
+  .open-btn:active{ transform:translateY(2px); }
+
+  /* 3D open transforms */
+  .panel.left { left:0; transform: rotateY(0deg); transition: transform 1.6s cubic-bezier(.2,.9,.3,1); }
+  .panel.right { left:50%; transform: rotateY(0deg); transition: transform 1.6s cubic-bezier(.2,.9,.3,1); }
+  .panels-open .panel.left { transform: rotateY(-100deg); }
+  .panels-open .panel.right { transform: rotateY(100deg); }
+
+  /* inside glow + confetti fireworks canvas */
+  .inside-scene {
+    position:relative;
+    margin-top:30px;
+    display:flex;
+    justify-content:center;
+    width:100%;
+    pointer-events:none;
+    z-index:4;
+  }
+
+  /* message card */
+  .card {
+    width:78%;
+    max-width:740px;
+    background: var(--card-bg);
+    border-radius:18px;
+    padding:28px 34px;
+    box-shadow: 0 22px 40px rgba(0,0,0,0.2);
+    border:4px solid rgba(212,175,55,0.95);
+    transform-origin:center top;
+    opacity:0;
+    transform: translateY(30px) scale(.98);
+  }
+  .card.show {
+    opacity:1;
+    transform: translateY(0) scale(1);
+    transition: all 900ms cubic-bezier(.2,.9,.3,1);
+  }
+  .card h1{
+    font-family:"Great Vibes", "Dancing Script", cursive;
+    color:var(--deep);
+    margin:0 0 8px; font-size:46px; letter-spacing:1px;
+  }
+  .card p{ margin:0; font-size:18px; color:#444; line-height:1.6; font-weight:500; }
+  .card .heart {
+    margin-top:16px; font-size:32px; color:#ff4d7a; animation:pulse 1.6s infinite;
+  }
+  @keyframes pulse { 0%{transform:scale(1);}50%{transform:scale(1.08);}100%{transform:scale(1);} }
+
+  /* reveal signature button */
+  .reveal {
+    margin-top:18px; display:inline-block; pointer-events:auto;
+    padding:10px 18px; background:linear-gradient(90deg,#ff9bb5,#ff758c);
+    color:white; border-radius:28px; border:none; font-weight:700; cursor:pointer;
+    box-shadow:0 10px 20px rgba(255,120,160,0.16);
+  }
+
+  /* handwriting signature - uses typing width reveal */
+  .signature {
+    display:inline-block; margin-left:14px; font-family:"Dancing Script", "Great Vibes", cursive;
+    font-size:22px; color:#222; vertical-align:middle;
+    white-space:nowrap; overflow:hidden; border-right:2px solid rgba(0,0,0,0.06);
+    max-width:0; transition: max-width 3s steps(40,end);
+  }
+  .signature.show { max-width:500px; border-right:2px solid rgba(0,0,0,0); }
+
+  /* small footer control row */
+  .controls { margin-top:18px; display:flex; gap:12px; align-items:center; justify-content:center; pointer-events:auto; }
+  .small { font-size:13px; color:#666; }
+
+  /* balloons - z-index below card but above background */
+  .balloon {
+    position:fixed; bottom:-140px; width:54px; height:76px; border-radius:50%;
+    z-index:3; pointer-events:none; transform-origin:center bottom;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.14), inset 0 8px 14px rgba(255,255,255,0.12);
+  }
+  .balloon::after {
+    content:""; position:absolute; bottom:-48px; left:50%; transform:translateX(-50%); width:2px; height:48px; background:rgba(0,0,0,0.22); border-radius:2px;
+  }
+  @keyframes floatUpFast { from{ transform: translateY(0) rotate(0);} to{ transform: translateY(-130vh) rotate(360deg);} }
+
+  /* fireworks / confetti canvas sized */
+  #fx { position:fixed; left:0; top:0; width:100%; height:100%; pointer-events:none; z-index:7; }
+
+  /* responsive */
+  @media (max-width:700px){
+    .door-wrap{ width:300px; height:440px; }
+    .card h1{ font-size:36px; }
+    .card{ padding:20px; width:88%; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="fairy" aria-hidden="true">
+      <div class="string"></div>
+      <!-- bulbs spaced CSS-wise -->
+      <div class="bulb" style="left:6%; background:#ffd1e6;"></div>
+      <div class="bulb" style="left:18%; background:#ffe9d6;"></div>
+      <div class="bulb" style="left:30%; background:#ffd3f0;"></div>
+      <div class="bulb" style="left:42%; background:#ffe0ec;"></div>
+      <div class="bulb" style="left:54%; background:#fff2d9;"></div>
+      <div class="bulb" style="left:66%; background:#ffd1e6;"></div>
+      <div class="bulb" style="left:78%; background:#ffe9d6;"></div>
+      <div class="bulb" style="left:90%; background:#ffd3f0;"></div>
+    </div>
+  </div>
+
+  <!-- dreamy bokeh -->
+  <div class="bokeh" id="bokeh"></div>
+
+  <div class="stage">
+    <div style="width:100%; display:flex; justify-content:center; gap:18px; align-items:center; flex-direction:column; pointer-events:none;">
+      <div style="font-family:'Great Vibes'; font-size:20px; color:rgba(214,47,120,0.92); pointer-events:auto;">A Special Surprise</div>
+
+      <!-- 3D gate -->
+      <div class="door-wrap">
+        <div class="gate" id="gate">
+          <div class="panel left">
+            <div class="garland"></div>
+            <div class="ribbon"></div>
+          </div>
+          <div class="panel right"></div>
+        </div>
+      </div>
+
+      <button class="open-btn" id="openBtn">Open Gate — See the Surprise</button>
+    </div>
+
+    <!-- inside scene: where the card will appear. includes confetti canvas -->
+    <div class="inside-scene">
+      <canvas id="fx"></canvas>
+      <div class="card" id="card">
+        <h1 id="title">🎊 Congratulations</h1>
+        <p id="message">May your wedding be filled with love, laughter, and endless blessings. May your life together be forever happy and bright.</p>
+        <div class="heart" aria-hidden="true">❤️</div>
+
+        <div style="margin-top:16px;">
+          <button class="reveal" id="revealBtn">See who sent this</button>
+          <span class="signature" id="signature">💌 With love, from <strong id="signName">Hamid Ullah Khan</strong></span>
+        </div>
+
+        <div class="controls" style="margin-top:10px;">
+          <div class="small">Tap the gate to open • Animated for phones & desktop</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- watermark faint name -->
+  <div class="watermark" id="water">Hayat Ullah Khan</div>
+
+  <!-- optional audio (replace src with your hosted mp3 if you want music) -->
+  <audio id="bgm" preload="auto">
+    <!-- Replace the src URL with your own music file or remove the audio element -->
+    <!-- <source src="https://example.com/soft-wedding-instrumental.mp3" type="audio/mpeg"> -->
+  </audio>
+
+<script>
+/* ---------------------------
+   CONFIG: change groom name here
+   --------------------------- */
+const GROOM_NAME = "Hayat Ullah Khan"; // change to Saqib Ullah Khan for other page
+const SENDER_NAME = "Hamid Ullah Khan"; // your signature
+const TITLE_EMOJI = "🎊"; // optional
+
+/* init UI text using config */
+document.getElementById("title").textContent = TITLE_EMOJI + " Congratulations " + GROOM_NAME + " " + TITLE_EMOJI;
+document.getElementById("signName").textContent = SENDER_NAME;
+document.getElementById("water").textContent = GROOM_NAME;
+document.getElementById("message").textContent = "May your wedding be filled with love, laughter, and lifelong happiness. May this be the start of an astonishing journey together.";
+
+/* gate open logic: plays music, reveals card, launches effects */
+const gate = document.getElementById("gate");
+const openBtn = document.getElementById("openBtn");
+const card = document.getElementById("card");
+const revealBtn = document.getElementById("revealBtn");
+const signature = document.getElementById("signature");
+const audio = document.getElementById("bgm");
+let opened = false;
+
+openBtn.addEventListener("click", openGate);
+gate.addEventListener("click", openGate);
+
+function openGate(){
+  if(opened) return;
+  opened = true;
+
+  // add class to open panels
+  document.querySelector('.gate').classList.add('panels-open');
+
+  // small delay for dramatic time
+  setTimeout(()=> {
+    // reveal the message card
+    card.classList.add('show');
+
+    // trigger confetti + fireworks
+    triggerFireworks();
+
+    // launch rose petals and balloons
+    startPetals();
+    startBalloons();
+
+    // play bg music if provided
+    try{
+      audio.currentTime = 0;
+      audio.play().catch(()=>{/* autoplay blocked if no user gesture - but we have user click */});
+    }catch(e){}
+
+  }, 900);
+}
+
+/* signature reveal */
+revealBtn.addEventListener("click", ()=>{
+  signature.classList.add('show');
+});
+
+/* --------------------------
+   visual effects functions
+   -------------------------- */
+
+/* Create bokeh / soft floating lights */
+(function createBokeh(){
+  const b = document.getElementById('bokeh');
+  const w = window.innerWidth, h = window.innerHeight;
+  const colors = ['#ffd1e1','#fff1d6','#ffe9f6','#fff0f0'];
+  for(let i=0;i<10;i++){
+    const d = document.createElement('div');
+    d.className = 'dot';
+    const size = (60 + Math.random()*240);
+    d.style.width = d.style.height = size + 'px';
+    d.style.left = (Math.random()*100) + '%';
+    d.style.top = (60 + Math.random()*30) + '%';
+    d.style.background = colors[Math.floor(Math.random()*colors.length)];
+    d.style.opacity = 0.08 + Math.random()*0.12;
+    d.style.filter = 'blur(' + (12 + Math.random()*30) + 'px)';
+    d.style.animationDuration = (20 + Math.random()*30) + 's';
+    d.style.transform = 'translateY(0)';
+    b.appendChild(d);
+  }
+})();
+
+/* Balloons */
+let balloonTimer;
+function startBalloons(){
+  if(balloonTimer) return;
+  balloonTimer = setInterval(()=> {
+    const b = document.createElement('div');
+    b.className = 'balloon';
+    const w = window.innerWidth;
+    const left = Math.random()*w;
+    b.style.left = left + 'px';
+    const hue = Math.floor(Math.random()*360);
+    b.style.background = `radial-gradient(circle at 30% 25%, hsl(${hue} 95% 82%), hsl(${(hue+20)%360} 95% 60%))`;
+    b.style.animation = `floatUpFast ${6 + Math.random()*6}s linear forwards`;
+    document.body.appendChild(b);
+    setTimeout(()=> b.remove(), 12000);
+  }, 900);
+}
+
+/* Rose petals falling (soft confetti) */
+function startPetals(){
+  const count = 36;
+  for(let i=0;i<count;i++){
+    setTimeout(()=> {
+      const p = document.createElement('div');
+      p.className = 'petal';
+      const size = 12 + Math.random()*22;
+      p.style.position = 'fixed';
+      p.style.left = (10 + Math.random()*80) + '%';
+      p.style.top = '-30px';
+      p.style.width = size + 'px';
+      p.style.height = size + 'px';
+      p.style.borderRadius = '40% 60% 40% 60%';
+      p.style.background = `linear-gradient(180deg, rgba(255,120,160,0.95), rgba(255,200,220,0.9))`;
+      p.style.transform = `rotate(${Math.random()*360}deg)`;
+      p.style.opacity = 0.95;
+      p.style.zIndex = 6;
+      p.style.pointerEvents = 'none';
+      p.style.transition = `transform ${6 + Math.random()*6}s linear, top ${6 + Math.random()*6}s linear, left ${6 + Math.random()*6}s linear, opacity 2s ease ${4 + Math.random()*2}s`;
+      document.body.appendChild(p);
+      requestAnimationFrame(()=> {
+        p.style.top = (90 + Math.random()*20) + 'vh';
+        p.style.left = (Math.random()*100) + 'vw';
+        p.style.transform = `rotate(${Math.random()*720}deg) translateY(0)`;
+        p.style.opacity = 0.9;
+      });
+      setTimeout(()=> p.remove(), 12000);
+    }, i*120);
+  }
+}
+
+/* Fireworks & confetti on canvas */
+function triggerFireworks(){
+  const canvas = document.getElementById('fx');
+  const ctx = canvas.getContext('2d');
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  function resizeCanvas(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+
+  // small confetti burst
+  function burst(x, y, color){
+    const pieces = [];
+    for(let i=0;i<60;i++){
+      pieces.push({
+        x, y,
+        vx: (Math.random()-0.5)*8,
+        vy: (Math.random()-1.5)*8,
+        life: 60 + Math.random()*40,
+        r: 4 + Math.random()*6,
+        color: `hsl(${Math.random()*360} 90% 60%)`
+      });
+    }
+    let t = 0;
+    const id = setInterval(()=> {
+      ctx.clearRect(0,0,canvas.width, canvas.height);
+      t++;
+      for(let p of pieces){
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.12;
+        p.life--;
+        ctx.beginPath();
+        ctx.fillStyle = p.color;
+        ctx.arc(p.x, p.y, Math.max(0.8, p.r*(p.life/120)), 0, Math.PI*2);
+        ctx.fill();
+      }
+      // fade out end
+      if(t > 80){ clearInterval(id); ctx.clearRect(0,0,canvas.width, canvas.height); }
+    }, 16);
+  }
+
+  // multiple bursts across top
+  const positions = [
+    [window.innerWidth*0.25, window.innerHeight*0.22],
+    [window.innerWidth*0.5, window.innerHeight*0.18],
+    [window.innerWidth*0.75, window.innerHeight*0.22]
+  ];
+  for(let i=0;i<positions.length;i++){
+    setTimeout(()=> burst(positions[i][0], positions[i][1]), i*350);
+  }
+
+  // longer shimmering confetti droplets
+  for(let i=0;i<60;i++){
+    setTimeout(()=> {
+      const x = Math.random()*canvas.width;
+      const y = -10;
+      const hue = Math.random()*360;
+      const piece = { x, y, vy: 2 + Math.random()*3, vx: -1 + Math.random()*2, r: 6 + Math.random()*6, color: `hsl(${hue} 90% 60%)`, life: 0};
+      const id = setInterval(()=> {
+        ctx.fillStyle = piece.color;
+        piece.x += piece.vx;
+        piece.y += piece.vy;
+        piece.vy += 0.05;
+        ctx.beginPath();
+        ctx.ellipse(piece.x, piece.y, piece.r*0.6, piece.r, 0,0,Math.PI*2);
+        ctx.fill();
+        piece.life++;
+        if(piece.y > canvas.height + 20 || piece.life > 300){ clearInterval(id); }
+      }, 16);
+    }, Math.random()*1400);
+  }
+}
+
+/* -------------------
+   Utility - small protection for mobile
+   ------------------- */
+(function nicerTap(){
+  // remove focus outlines on fast taps
+  document.addEventListener('touchstart', ()=>{}, {passive:true});
+})();
+</script>
+</body>
+                                                               </html>
