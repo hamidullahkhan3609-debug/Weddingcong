@@ -1,49 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <title>Wedding Congratulations</title>
   <style>
     body {
-      margin: 0;
+      margin:0;
+      padding:0;
       font-family: 'Great Vibes', cursive;
-      background: radial-gradient(circle at top, #fff0f5, #ffd1dc, #ffb6c1);
-      overflow: hidden;
-      text-align: center;
+      overflow-x:hidden;
+      /* Multicoloured Decorative Background */
+      background: 
+        radial-gradient(circle at top left, #ffd1dc, #ffe4e1, #fff0f5),
+        radial-gradient(circle at bottom right, #c1e1ff, #e6ccff, #fff);
+      background-blend-mode: screen;
     }
 
-    /* Golden Wedding Gate */
-    .gate-container {
+    /* Gate */
+    .container {
       position: relative;
-      width: 400px;
-      height: 500px;
+      width: 420px;
+      height: 520px;
       margin: 100px auto;
-      perspective: 1000px;
+      perspective: 1200px;
     }
     .gate {
       width: 100%;
       height: 100%;
-      background: url('https://i.ibb.co/pnrdLnH/wedding-door.jpg') center/cover no-repeat;
-      border: 8px solid gold;
-      border-radius: 20px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+      background: url('https://i.pinimg.com/736x/7a/bd/6e/7abd6ef6ed3fbc547e4d77e076b2b8f9.jpg') center/cover no-repeat;
+      border:8px solid gold;
+      border-radius:18px;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.5);
       transform-style: preserve-3d;
       transition: transform 2s ease;
     }
     .gate.open {
-      transform: rotateY(-120deg);
+      transform: rotateY(-110deg);
     }
     .open-btn {
       position: absolute;
       bottom: -70px;
       left: 50%;
       transform: translateX(-50%);
-      padding: 15px 30px;
-      background: #d63384;
+      padding: 15px 35px;
+      background: linear-gradient(45deg, #ff5c9e, #ff85a1);
       color: white;
       font-size: 18px;
       border: none;
-      border-radius: 30px;
+      border-radius: 35px;
       cursor: pointer;
       box-shadow: 0 6px 15px rgba(0,0,0,0.3);
     }
@@ -60,109 +64,105 @@
       border-radius: 25px;
       box-shadow: 0 15px 45px rgba(0,0,0,0.3);
       animation: fadeIn 2s ease forwards;
+      text-align:center;
     }
     .card h1 {
-      font-size: 40px;
-      color: #d63384;
+      color:#d63384;
+      font-size:42px;
     }
     .card p {
-      font-size: 20px;
-      font-family: 'Segoe UI', sans-serif;
-      color: #333;
+      font-size:20px;
+      font-family:'Segoe UI', sans-serif;
+      color:#333;
     }
 
+    /* Reveal Button & Signature */
     .reveal-btn {
-      margin-top: 20px;
-      padding: 12px 25px;
-      background: #ff85a1;
-      border: none;
-      color: white;
-      border-radius: 25px;
-      font-size: 16px;
-      cursor: pointer;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+      margin-top:20px;
+      padding:12px 25px;
+      background:#ff85a1;
+      color:white;
+      border:none;
+      border-radius:25px;
+      font-size:16px;
+      cursor:pointer;
+      box-shadow:0 6px 15px rgba(0,0,0,0.2);
     }
-
     .signature {
-      display: none;
-      margin-top: 25px;
-      font-size: 22px;
-      font-family: 'Dancing Script', cursive;
-      color: #111;
+      display:none;
+      margin-top:25px;
+      font-size:22px;
+      color:#111;
+      font-family:'Dancing Script', cursive;
+      white-space:nowrap;
+      overflow:hidden;
+      border-right:2px solid #111;
       animation: handwriting 3s steps(30) forwards;
-      white-space: nowrap;
-      overflow: hidden;
-      border-right: 2px solid #111;
     }
 
     /* Animations */
     @keyframes fadeIn {
-      from {opacity: 0; transform: scale(0.9);}
-      to {opacity: 1; transform: scale(1);}
+      from {opacity:0; transform:scale(0.9);}
+      to {opacity:1; transform:scale(1);}
     }
     @keyframes handwriting {
-      from {width: 0;}
-      to {width: 100%;}
+      from {width:0;}
+      to {width:100%;}
     }
 
     /* Confetti */
     .confetti {
-      position: fixed;
-      width: 12px;
-      height: 12px;
-      top: -10px;
+      position:fixed;
+      width:12px;
+      height:12px;
+      top:-10px;
       animation: fall linear forwards;
-      z-index: 10;
+      z-index:10;
     }
     @keyframes fall {
-      to { transform: translateY(110vh) rotate(360deg); }
+      to { transform: translateY(110vh) rotate(360deg);}
     }
   </style>
 </head>
 <body>
 
   <!-- Gate -->
-  <div class="gate-container">
+  <div class="container">
     <div class="gate" id="gate"></div>
     <button class="open-btn" onclick="openGate()">Open Gate to See Surprise</button>
   </div>
 
-  <!-- Message Card -->
+  <!-- Card -->
   <div class="card" id="card">
     <h1>🎊 Congratulations Hayat Ullah Khan 🎉</h1>
-    <p>May your wedding be filled with love, laughter, and lifelong happiness.  
-       May this be the start of a beautiful journey together ❤️</p>
+    <p>May your wedding be filled with love, laughter, and lifelong happiness.<br>
+    May this be the start of a beautiful journey together ❤️</p>
     <button class="reveal-btn" onclick="showSignature()">See who sent this</button>
     <div class="signature" id="signature">💌 With love, from Hamid Ullah Khan</div>
   </div>
 
   <script>
-    function openGate() {
-      let gate = document.getElementById("gate");
-      gate.classList.add("open");
+    function openGate(){
+      document.getElementById('gate').classList.add('open');
       setTimeout(() => {
-        document.getElementById("card").style.display = "block";
+        document.getElementById('card').style.display = 'block';
         launchConfetti();
-      }, 2000); // wait until gate animation finishes
+      }, 2000);
     }
-
-    function showSignature() {
-      document.getElementById("signature").style.display = "block";
+    function showSignature(){
+      document.getElementById('signature').style.display = 'block';
     }
-
-    function launchConfetti() {
-      for (let i = 0; i < 80; i++) {
-        let confetti = document.createElement("div");
-        confetti.classList.add("confetti");
-        document.body.appendChild(confetti);
-        confetti.style.left = Math.random() * window.innerWidth + "px";
-        confetti.style.background = "hsl(" + Math.random() * 360 + ",100%,50%)";
-        confetti.style.animationDuration = (3 + Math.random() * 2) + "s";
-        confetti.style.opacity = Math.random();
-        setTimeout(() => confetti.remove(), 5000);
+    function launchConfetti(){
+      for(let i=0;i<80;i++){
+        let c=document.createElement('div');
+        c.classList.add('confetti');
+        document.body.appendChild(c);
+        c.style.left = Math.random()*window.innerWidth + 'px';
+        c.style.background = 'hsl('+Math.random()*360+',100%,50%)';
+        c.style.animationDuration = (3+Math.random()*2)+'s';
+        setTimeout(()=>c.remove(),5000);
       }
     }
   </script>
-
 </body>
 </html>
