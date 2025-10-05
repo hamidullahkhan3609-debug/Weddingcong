@@ -1,121 +1,162 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Congratulations Hayat Ullah Khan</title>
+  <title>Congratulations Hayat Ullah Khan 💍</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script&display=swap');
+
     body {
       margin: 0;
       padding: 0;
-      background: linear-gradient(120deg, #6a11cb, #ffb347, #ffdde1);
+      background: linear-gradient(120deg, #6a11cb, #ffb347, #d4af37, #c471ed);
       background-size: 400% 400%;
-      animation: gradientBG 12s ease infinite;
+      animation: gradientBG 15s ease infinite;
       overflow-x: hidden;
       font-family: 'Great Vibes', cursive;
+      height: 100vh;
+      color: white;
     }
     @keyframes gradientBG {
       0% {background-position:0% 50%;}
       50% {background-position:100% 50%;}
       100% {background-position:0% 50%;}
     }
+
     h1 {
       text-align: center;
-      margin: 20px;
-      font-size: 38px;
-      color: gold;
-      text-shadow: 2px 2px 8px black;
+      margin-top: 30px;
+      font-size: 40px;
+      color: #fff;
+      text-shadow: 0 0 10px #000;
     }
+
     .door {
-      width: 300px;
-      height: 450px;
-      margin: 50px auto;
-      border: 6px solid gold;
-      border-radius: 15px;
-      background: url('https://i.pinimg.com/564x/d5/7a/44/d57a4448d0f8056e649f7e63f2c2dd20.jpg') center/cover no-repeat;
+      width: 320px;
+      height: 480px;
+      margin: 60px auto;
+      border: 8px solid gold;
+      border-radius: 20px;
+      background: url('https://i.pinimg.com/736x/18/ab/bb/18abbbce3ff14e07f8f2f7adf290c6e7.jpg') center/cover no-repeat;
       cursor: pointer;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.5);
-      transition: transform 2s ease;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+      transition: transform 2.5s ease;
       transform-style: preserve-3d;
     }
     .door.open { transform: rotateY(-120deg); }
+
     .card {
       display: none;
-      margin: 20px auto;
-      width: 80%;
-      max-width: 700px;
-      padding: 30px;
-      background: #fffaf0;
+      margin: 30px auto;
+      width: 85%;
+      max-width: 750px;
+      padding: 35px;
+      background: rgba(255,248,230,0.95);
       border: 8px double gold;
       border-radius: 25px;
       text-align: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+      color: #000;
     }
     .card h2 {
-      font-size: 36px;
+      font-size: 40px;
       color: #c2185b;
+      margin-bottom: 15px;
+      font-family: 'Great Vibes', cursive;
     }
     .card p {
-      font-size: 20px;
-      color: #333;
+      font-size: 22px;
+      line-height: 1.6;
+      font-family: 'Dancing Script', cursive;
     }
     .btn {
-      margin-top: 20px;
-      padding: 10px 20px;
-      background: gold;
+      margin-top: 25px;
+      padding: 12px 25px;
+      background: linear-gradient(45deg, gold, orange);
+      color: white;
       border: none;
-      border-radius: 20px;
+      border-radius: 30px;
       cursor: pointer;
       font-size: 18px;
+      font-family: 'Dancing Script', cursive;
+      transition: 0.4s;
     }
+    .btn:hover {
+      transform: scale(1.1);
+      background: linear-gradient(45deg, #ffb347, #ffcc33);
+    }
+
     .signature {
       display: none;
-      margin-top: 20px;
-      font-size: 26px;
-      font-family: 'Dancing Script', cursive;
+      margin-top: 25px;
+      font-size: 28px;
+      font-family: 'Great Vibes', cursive;
+      color: #000;
       white-space: nowrap;
       overflow: hidden;
-      border-right: 2px solid black;
+      border-right: 3px solid black;
       animation: typing 3s steps(30) forwards;
     }
     @keyframes typing {
       from {width:0;}
       to {width:100%;}
     }
+
     /* Balloons */
     .balloon {
       position: fixed;
       bottom: -150px;
-      width: 40px;
-      height: 60px;
+      width: 50px;
+      height: 70px;
       border-radius: 50%;
       animation: float 6s linear infinite;
+      z-index: 1000;
     }
     @keyframes float {
       to { transform: translateY(-110vh);}
     }
+
     /* Petals */
     .petal {
       position: fixed;
-      width: 18px;
-      height: 18px;
+      top: -50px;
+      width: 20px;
+      height: 20px;
       border-radius: 50%;
-      top: -20px;
-      background: pink;
-      animation: fall 8s linear infinite;
+      background: radial-gradient(ellipse at center, #ff6699 0%, #ff3366 70%);
+      animation: fall 10s linear infinite;
+      z-index: 500;
     }
     @keyframes fall {
       to { transform: translateY(110vh) rotate(360deg);}
     }
+
+    /* Floating glow dots */
+    .dot {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.8);
+      box-shadow: 0 0 20px rgba(255,255,255,0.8);
+      animation: twinkle 4s infinite ease-in-out;
+    }
+    @keyframes twinkle {
+      0%,100% {opacity: 0.2;}
+      50% {opacity: 1;}
+    }
   </style>
 </head>
 <body>
-  <h1>💍 Open the Gate to Reveal Hayat's Surprise 💍</h1>
+  <h1>💎 Open the Gate to Reveal Hayat's Surprise 💎</h1>
+
   <div class="door" onclick="openGate()"></div>
 
   <div class="card" id="card">
-    <h2>Congratulations Hayat Ullah Khan 🎉</h2>
-    <p>Wishing you endless happiness, love, and blessings in your marriage.<br>
-    May your journey together be filled with joy 🌹</p>
+    <h2>Congratulations Hayat Ullah Khan 🎊</h2>
+    <p>Wishing you a lifetime of love, joy, and endless blessings. 💛<br>
+    May your new journey together be filled with golden moments and pure happiness 🌹</p>
     <button class="btn" onclick="showSignature()">See who sent this</button>
     <div class="signature" id="signature">💌 With love, from Hamid Ullah Khan</div>
   </div>
@@ -124,14 +165,15 @@
 
   <script>
     function openGate(){
-      let door=document.querySelector('.door');
+      const door=document.querySelector('.door');
       door.classList.add('open');
       setTimeout(()=>{
         document.getElementById('card').style.display='block';
         playMusic();
         launchBalloons();
         launchPetals();
-      },2000);
+        floatingDots();
+      },2200);
     }
     function showSignature(){
       document.getElementById('signature').style.display='block';
@@ -140,7 +182,7 @@
       document.getElementById('music').play().catch(()=>{});
     }
     function launchBalloons(){
-      for(let i=0;i<20;i++){
+      for(let i=0;i<25;i++){
         let b=document.createElement('div');
         b.className='balloon';
         b.style.left=Math.random()*window.innerWidth+'px';
@@ -151,13 +193,23 @@
       }
     }
     function launchPetals(){
-      for(let i=0;i<30;i++){
+      for(let i=0;i<25;i++){
         let p=document.createElement('div');
         p.className='petal';
         p.style.left=Math.random()*window.innerWidth+'px';
-        p.style.animationDuration=(5+Math.random()*5)+'s';
+        p.style.animationDuration=(5+Math.random()*6)+'s';
         document.body.appendChild(p);
         setTimeout(()=>p.remove(),10000);
+      }
+    }
+    function floatingDots(){
+      for(let i=0;i<40;i++){
+        let d=document.createElement('div');
+        d.className='dot';
+        d.style.left=Math.random()*window.innerWidth+'px';
+        d.style.top=Math.random()*window.innerHeight+'px';
+        d.style.animationDelay=(Math.random()*3)+'s';
+        document.body.appendChild(d);
       }
     }
   </script>
